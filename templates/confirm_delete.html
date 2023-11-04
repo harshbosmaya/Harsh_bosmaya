@@ -33,7 +33,7 @@
         <br />
 
 
-        <form action="/update/{{d.id}}" method="post"> {% csrf_token %}
+        <form action="/delete/{{d.id}}" method="post"> {% csrf_token %}
             <div class="form-group">
             <input
                 readonly="readonly"
@@ -42,7 +42,7 @@
                 class="form-control"
                 placeholder="Name"
                 name="name"
-                value={{d.name}}
+                value="{{d.name}}"
             />
             </div>
 
@@ -67,19 +67,24 @@
                 class="form-control"
                 placeholder="Notes"
                 name="notes"
-                value={{d.notes}}
+                value="{{d.notes}}"
             />
-            </div>
-            
-            </div>
-            <br />
 
             <div class="d-grid gap-2">
                 <br>
                 <button class="btn btn-danger" type="submit">Delete</button>
                 {% comment %} <a type="button" href="/delete/{{d.id}}" class="btn btn-outline-danger">Delete</a> {% endcomment %}
                 <a href="/" class="btn btn-secondary">Cancel</a>
-            </div> 
+            </div>
+
+
+
+
+            </div>
+            
+            </div>
+            <br />
+
     </div>
     </div>
 
