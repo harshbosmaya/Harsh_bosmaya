@@ -33,7 +33,7 @@
         <br />
 
 
-        <form action="/delete/{{d.id}}" method="post"> {% csrf_token %}
+        <form action="/confirm_delete/{{d.id}}" method="post"> {% csrf_token %}
             <div class="form-group">
             <input
                 readonly="readonly"

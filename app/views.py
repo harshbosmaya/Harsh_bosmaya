@@ -47,7 +47,7 @@ def insertData(request):                         #temporary comment for testing 
             messages.info(request, "Email and/or Name already exists in records.")
         else:
             print(contacts.objects.all())
-            query=contacts(id=next_id,name=name,email=email)
+            query=contacts(id=next_id,name=name,email=email,notes=notes)
             query.save()
             messages.info(request,"Data Inserted Successfully")
         return redirect("/")
@@ -63,7 +63,7 @@ def updateData(request,id):
         # time = models.DateTimeField(auto_now_add=True)
         time = models.DateTimeField(auto_now_add=True)
         print(contacts.objects.all())
-        if contacts.objects.filter(Q(name=name) | Q(email=email)).exists():
+        if contacts.objects.filter(Q(name=name) | Q(email=email)).exclude(id=id).exists():
             messages.info(request, "Email and/or Name already exists in records.")
         else:
             edit=contacts.objects.get(id=id)
@@ -98,12 +98,22 @@ def updateData(request,id):
 
 
 
-
-
-# old code
 def deleteData(request,id):
-    context = {"id":id}
+    if request.method=="POST":
+        name=request.POST['name']
+        email=request.POST['email']
+        notes=request.POST['notes']
+        time = models.DateTimeField(auto_now_add=True)
+        print(contacts.objects.all())
+
+    d=contacts.objects.get(id=id) 
+    context={"d":d}
+    print(d.notes)
     return render(request,"confirm_delete.html",context)
+# old code
+# def deleteData(request,id):
+#     context = {"id":id}
+#     return render(request,"confirm_delete.html",context)
 
 def confirm_function(request,id):
     d=contacts.objects.get(id=id) 
