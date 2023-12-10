@@ -11,7 +11,15 @@ from django.db.models import Q
 # Create your views here.
 def index(request):
     data=contacts.objects.all()
-    print(data)
+    # time_values = [v for dict_values in data.values() for k,v in dict_values.items() if k=='time']
+    # date_obj = datetime.now().date()
+    # # datetime_data = [datetime.combine(date_obj, value) for value in time_values]
+    # for dict_values in data.values():
+    #     for k,v in dict_values.items():
+    #         if k=='time':
+    #             v = v.strftime('%d-%b-%Y')
+    #             print(v)
+    
     context={"data":data}
     # data = {'name':data[0].name,'email':data[0].email,'time':data[0].time}
     # context={"data":}
@@ -19,7 +27,7 @@ def index(request):
 
 def create(request):
     data=contacts.objects.all()
-    print(data)
+    print(f"data {data}")
     context={"data":data}
     return render(request,"create.html",{"form":data})#created new def for create page
 
