@@ -58,7 +58,7 @@ def insertData(request):                         #temporary comment for testing 
             query=contacts(id=next_id,name=name,email=email,notes=notes)
             query.save()
             messages.info(request,"Data Inserted Successfully")
-        return redirect("/")
+        return redirect("/create")
 
     return render(request,"index.html")
 
@@ -80,7 +80,7 @@ def updateData(request,id):
             edit.notes=notes
             edit.save()
             messages.warning(request,"Data Updated Successfully")
-        return redirect("/")
+        return redirect("/update/"+ id)
 
     d=contacts.objects.get(id=id) 
     context={"d":d}
